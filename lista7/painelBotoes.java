@@ -1,36 +1,36 @@
 package lista7;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class painelBotoes extends JPanel {
 
-	JButton cadastrar;
-	JButton listar;
-	JButton atualizar;
-	JButton deletar;
+	Paineis painel;
 	
-	public painelBotoes() {
+	public painelBotoes(Paineis painel) {
 		
-		setBackground(Color.black);
+		this.painel = painel;
 		
-		cadastrar = criarBotao("Cadastrar");
-		add(cadastrar);
+		setBackground(Color.LIGHT_GRAY);
+		
+		JButton cadastrar = criarBotao("Cadastrar");
 		cadastrar.addActionListener(new acaoCadastrar());
+		add(cadastrar);
 		
-		listar = criarBotao("Listar");
+		JButton listar = criarBotao("Listar");
+		listar.addActionListener(new acaoListar());
 		add(listar);
 		
-		atualizar = criarBotao("Atualizar");
+		JButton atualizar = criarBotao("Atualizar");
+		atualizar.addActionListener(new acaoAtualizar());
 		add(atualizar);
 		
-		deletar = criarBotao("Deletar");
+		JButton deletar = criarBotao("Deletar");
+		deletar.addActionListener(new acaoDeletar());
 		add(deletar);
 	}
 	
@@ -41,11 +41,53 @@ public class painelBotoes extends JPanel {
 	
 	private class acaoCadastrar implements ActionListener{
 		
-		Paineis paineis;
+		public void actionPerformed(ActionEvent e) {
+			if(painel.painelcadastro.isVisible()) {
+				painel.painelcadastro.setVisible(false);
+			}
+			else painel.painelcadastro.setVisible(true);
+			painel.painellistar.setVisible(false);
+			painel.painelatualizar.setVisible(false);
+			painel.paineldeletar.setVisible(false);
+		}
+	}
+	
+	private class acaoListar implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e) {
-			
-			paineis.painelCadastro().setVisible(true);
+			if(painel.painellistar.isVisible()) {
+				painel.painellistar.setVisible(false);
+			}
+			else painel.painellistar.setVisible(true);
+			painel.painelcadastro.setVisible(false);
+			painel.painelatualizar.setVisible(false);
+			painel.paineldeletar.setVisible(false);
+		}
+	}
+	
+	private class acaoAtualizar implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e) {
+			if(painel.painelatualizar.isVisible()) {
+				painel.painelatualizar.setVisible(false);
+			}
+			else painel.painelatualizar.setVisible(true);
+			painel.painelcadastro.setVisible(false);
+			painel.painellistar.setVisible(false);
+			painel.paineldeletar.setVisible(false);
+		}
+	}
+	
+	private class acaoDeletar implements ActionListener{
+		
+		public void actionPerformed(ActionEvent e) {
+			if(painel.paineldeletar.isVisible()) {
+				painel.paineldeletar.setVisible(false);
+			}
+			else painel.paineldeletar.setVisible(true);
+			painel.painelcadastro.setVisible(false);
+			painel.painelatualizar.setVisible(false);
+			painel.painellistar.setVisible(false);
 		}
 	}
 }
