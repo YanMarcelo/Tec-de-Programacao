@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
@@ -21,7 +22,7 @@ public class Paineis extends JPanel{
 	JPanel painellistar;
 	JPanel painelatualizar;
 	JPanel paineldeletar;	
-	
+
 	public Paineis() {
 		
 		this.add(painelCadastro());
@@ -33,36 +34,49 @@ public class Paineis extends JPanel{
 	
 	public JPanel painelCadastro() {
 	    painelcadastro = new JPanel();
-	    painelcadastro.setLayout(new GridLayout(10,2));
+	    painelcadastro.setLayout(new GridLayout(5,2,2,4));
 	    
-	    JTextField barranome = new JTextField();
-	    JTextField barracpf = new JTextField();
-	    JTextField barramatricula = new JTextField();
-	    JTextField barravertente = new JTextField();
+	    JTextField barranome = new JTextField(10);
+	    JTextField barracpf = new JTextField(10);
+	    JTextField barramatricula = new JTextField(10);
+	    JTextField barravertente = new JTextField(10);
 
 	    JButton botaocadastrar = new JButton("Cadastro");
 
-	    JLabel nome = criarTexto("Nome :");
-	    nome.setForeground(Color.white);
-	    JLabel cpf = criarTexto("CPF :");
-	    cpf.setForeground(Color.white);
-	    JLabel matricula = criarTexto("Matrícula :");
-	    matricula.setForeground(Color.white);
-	    JLabel vertente = criarTexto("Vertente :");
-	    vertente.setForeground(Color.white);
+	    JLabel nome = criarTexto("Nome: ");
+	    JLabel cpf = criarTexto("CPF: ");
+	    JLabel matricula = criarTexto("Matrícula:  ");
+	    JLabel vertente = criarTexto("Vertente: ");
 	    
-	    painelcadastro.add(nome);
-	    painelcadastro.add(barranome);
-	    painelcadastro.add(cpf);
-	    painelcadastro.add(barracpf);
-	    painelcadastro.add(matricula);
-	    painelcadastro.add(barramatricula);
-	    painelcadastro.add(vertente);
-	    painelcadastro.add(barravertente);
-	    painelcadastro.add(botaocadastrar);
+	    JPanel painelnome = new JPanel();
+	    painelnome.setLayout(new BorderLayout());
+	    painelnome.add(nome, BorderLayout.WEST);
+	    painelnome.add(barranome, BorderLayout.EAST);
+	    painelcadastro.add(painelnome);
+	    
+	    JPanel painelcpf = new JPanel();
+	    painelcpf.setLayout(new BorderLayout());
+	    painelcpf.add(cpf, BorderLayout.WEST);
+	    painelcpf.add(barracpf, BorderLayout.EAST);
+	    painelcadastro.add(painelcpf);
+	    
+	    JPanel painelmatricula = new JPanel();
+	    painelmatricula.setLayout(new BorderLayout());
+	    painelmatricula.add(matricula, BorderLayout.WEST);
+	    painelmatricula.add(barramatricula, BorderLayout.EAST);
+	    painelcadastro.add(painelmatricula);
 
-	    painelcadastro.setBackground(new Color(105, 105, 105));
-	    painelcadastro.setPreferredSize(new Dimension(560, 510));
+	    JPanel painelvertente = new JPanel();
+	    painelvertente.setLayout(new BorderLayout());
+	    painelvertente.add(vertente, BorderLayout.WEST);
+	    painelvertente.add(barravertente, BorderLayout.EAST);
+	    painelcadastro.add(painelvertente);
+	    
+	    JPanel painelbotao = new JPanel();
+	    painelbotao.setLayout(new BorderLayout());
+	    painelbotao.add(botaocadastrar, BorderLayout.SOUTH);
+	    painelcadastro.add(painelbotao);
+
 	    painelcadastro.setVisible(false);
 
 	    return painelcadastro;
@@ -70,11 +84,10 @@ public class Paineis extends JPanel{
 	
 	public JPanel painelListar() {
 		
-		JLabel tabela = new JLabel("tabela");
+		JTable tabela = new JTable();
 		painellistar = new JPanel();
 		painellistar.add(tabela);
 		painellistar.setBackground(Color.gray);
-	    painellistar.setPreferredSize(new Dimension(560,510));
 		painellistar.setVisible(false);
 	    
 		return painellistar;
@@ -83,20 +96,31 @@ public class Paineis extends JPanel{
 	public JPanel painelAtualizar() {
 		
 		painelatualizar = new JPanel();
-		
-		JLabel matricula = new JLabel("Matrícula :");
-		JLabel vertente = new JLabel("Ventente :");
-		JTextField barramatricula = new JTextField();
-		JTextField barravertente = new JTextField();
+	    painelatualizar.setLayout(new GridLayout(3,2,5,4));
 
-		painelatualizar.add(matricula);
-		painelatualizar.add(barramatricula);
-		
-		painelatualizar.add(vertente);
-		painelatualizar.add(barravertente);
+		JLabel matricula = new JLabel("Matrícula:  ");
+		JLabel vertente = new JLabel("Ventente:  ");
+		JTextField barramatricula = new JTextField(10);
+		JTextField barravertente = new JTextField(10);
 
-		painelatualizar.setBackground(Color.gray);
-		painelatualizar.setPreferredSize(new Dimension(560,510));
+		JPanel painelmatricula = new JPanel();
+		painelmatricula.setLayout(new BorderLayout());
+		painelmatricula.add(matricula, BorderLayout.WEST);
+		painelmatricula.add(barramatricula, BorderLayout.EAST);
+		painelatualizar.add(painelmatricula);
+		
+		JPanel painelvertente = new JPanel();
+		painelvertente.setLayout(new BorderLayout());
+		painelvertente.add(vertente, BorderLayout.WEST);
+		painelvertente.add(barravertente, BorderLayout.EAST);
+		painelatualizar.add(painelvertente);
+		
+		JPanel painelbotao = new JPanel();
+		JButton botaoatualizar = new JButton("Atualizar");
+	    painelbotao.setLayout(new BorderLayout());
+	    painelbotao.add(botaoatualizar, BorderLayout.SOUTH);
+	    painelatualizar.add(painelbotao);
+		
 		painelatualizar.setVisible(false);
 		
 		return painelatualizar;
@@ -105,12 +129,24 @@ public class Paineis extends JPanel{
 	public JPanel painelDeletar() {
 		
 		paineldeletar = new JPanel();
-		JLabel textocadastro = new JLabel("Teste4");
-		JTextField barra = new JTextField();
-		paineldeletar.setBackground(new Color(169,169,169));
-		paineldeletar.setPreferredSize(new Dimension(500,500));
-		paineldeletar.add(textocadastro);
-		paineldeletar.add(barra);
+	    paineldeletar.setLayout(new GridLayout(2,2,5,4));
+
+		JLabel matricula = new JLabel("Matrícula:  ");
+		JTextField barramatricula = new JTextField(10);
+
+		JPanel painelmatricula = new JPanel();
+		painelmatricula.setLayout(new BorderLayout());
+		painelmatricula.add(matricula, BorderLayout.WEST);
+		painelmatricula.add(barramatricula, BorderLayout.EAST);
+		paineldeletar.add(painelmatricula);
+		
+		
+		JPanel painelbotao = new JPanel();
+		JButton botaoatualizar = new JButton("Deletar");
+	    painelbotao.setLayout(new BorderLayout());
+	    painelbotao.add(botaoatualizar, BorderLayout.SOUTH);
+	    paineldeletar.add(painelbotao);
+	    
 		paineldeletar.setVisible(false);
 		
 		return paineldeletar;
