@@ -1,4 +1,4 @@
-package apresentacao;
+package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import negocios.Plano;
+import model.Plano;
 
 public class PainelRobos extends JPanel{
 		

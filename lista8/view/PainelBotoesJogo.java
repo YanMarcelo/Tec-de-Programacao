@@ -1,4 +1,4 @@
-package apresentacao;
+package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,15 +19,17 @@ public class PainelBotoesJogo extends JPanel{
 		
 		JButton verificar = new JButton(" Verificar ");
 		JButton sair = new JButton(" Sair do Jogo ");
-		JButton jogada = new JButton(" Próxima Jogada ");
+		JButton proximajogada = new JButton(" Próxima Jogada ");
 
 		verificar.setPreferredSize(new Dimension(60,60));
 		verificar.setBackground(Color.black);
 		verificar.setForeground(Color.white);
+		verificar.addActionListener(new acaoVerificar());
 
-		jogada.setPreferredSize(new Dimension(60,60));
-		jogada.setBackground(Color.black);
-		jogada.setForeground(Color.white);
+		proximajogada.setPreferredSize(new Dimension(60,60));
+		proximajogada.setBackground(Color.black);
+		proximajogada.setForeground(Color.white);
+		proximajogada.addActionListener(new acaoProximaJogada());
 
 		sair.setPreferredSize(new Dimension(60,60));
 		sair.setBackground(Color.black);
@@ -38,7 +40,7 @@ public class PainelBotoesJogo extends JPanel{
 		this.setBackground(Color.white);
 
 		this.add(verificar);
-		this.add(jogada);
+		this.add(proximajogada);
 		this.add(sair);
 
 	}
@@ -66,6 +68,20 @@ public class PainelBotoesJogo extends JPanel{
 			if (resposta == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
+		}
+	}
+	
+	private class acaoVerificar implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			
+			}
+		}
+
+	private class acaoProximaJogada implements ActionListener {
+
+	public void actionPerformed(ActionEvent e) {
+		
 		}
 	}
 }

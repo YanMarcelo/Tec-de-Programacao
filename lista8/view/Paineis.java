@@ -1,4 +1,4 @@
-package apresentacao;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,13 +15,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import negocios.Celula;
-import negocios.Entidades;
-import negocios.Plano;
+import model.Celula;
+import model.Entidades;
+import model.Plano;
 
 import javax.swing.BoxLayout;
 
-public class Paineis extends JPanel{
+public class Paineis extends JPanel {
 
 	JPanel painelcima;
 	JPanel painelbotoes;
@@ -29,18 +29,12 @@ public class Paineis extends JPanel{
 	JTextField barra;
 	JButton jogar;
 
-	Plano plano;
-	Celula celulas;
-	Entidades entidades;
-	BotoesRobo botoesRobo;
-
-
 	public Paineis() {
 
 		this.setLayout(new BorderLayout());
 		this.add(painelBotoes(), BorderLayout.WEST);
-		this.add(painelDireito(), BorderLayout.EAST);
 		this.add(painelSuperior(), BorderLayout.NORTH);
+		this.add(painelDireito(), BorderLayout.EAST);
 	}
 
 	public JPanel painelSuperior() {
@@ -73,56 +67,36 @@ public class Paineis extends JPanel{
 		return painelcima;
 	}
 
-	public JPanel painelBotoes() {
-
-		painelbotoes = new JPanel();
-
-		criarBotao(painelbotoes);
-
-		painelbotoes.setLayout(new GridLayout(8,8));
-		painelbotoes.setPreferredSize(new Dimension(500,400));
-
-		painelbotoes.setVisible(false);
-
-		return painelbotoes;
-	}
-
-	public JPanel painelDireito() {
-
+	private JPanel painelDireito() {
+		
 		paineldireito = new JPanel();
-
 		paineldireito.setLayout(new BoxLayout(paineldireito, BoxLayout.Y_AXIS));
-		paineldireito.setPreferredSize(new Dimension(235,0));
-
+		paineldireito.setPreferredSize(new Dimension(235, 0));
 		paineldireito.add(new PainelInfo());
 		paineldireito.add(new PainelRobos());
 		paineldireito.add(new PainelBotoesJogo());
-
 		paineldireito.setVisible(false);
-
+		
 		return paineldireito;
 	}
 
-	public void criarBotao(JPanel painelbotoes) {
 
-		for(int i=0; i<8; i++) {
-			for(int j=0; j<8; j++) {
-				JButton botao = new JButton();
-				LineBorder border = new LineBorder(Color.black, 1);
-				if((i+j)%2==0) {
-					botao.setBackground(Color.black);
-					botao.setBorder(border);
-				} else {
-					botao.setBackground(Color.white);
-					botao.setBorder(border);
-				}
-				painelbotoes.add(botao);
-			}
-		}
+	public JPanel painelBotoes() {
+
+		painelbotoes = new JPanel();
+		getPainelbotoes().setLayout(new GridLayout(8,8));
+		getPainelbotoes().setPreferredSize(new Dimension(500,400));
+		getPainelbotoes().setVisible(false);
+
+		return getPainelbotoes();
 	}
 
 	private void verificarBotaoJogar() {
 		jogar.setEnabled(!barra.getText().isEmpty());
+	}
+
+	public JPanel getPainelbotoes() {
+		return painelbotoes;
 	}
 
 	private class acaoJogar implements ActionListener{
@@ -130,15 +104,8 @@ public class Paineis extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			barra.setText("");
 			barra.setEditable(false);
-			painelbotoes.setVisible(!painelbotoes.isVisible());
+			getPainelbotoes().setVisible(!getPainelbotoes().isVisible());
 			paineldireito.setVisible(!paineldireito.isVisible());
-		}
-	}
-
-	private class acaoPlano implements ActionListener{
-
-		public void actionPerformed(ActionEvent e) {
-
 		}
 	}
 
@@ -147,7 +114,6 @@ public class Paineis extends JPanel{
 		public void insertUpdate(DocumentEvent e) {
 			verificarBotaoJogar();
 		}
-
 
 		public void removeUpdate(DocumentEvent e) {
 			verificarBotaoJogar();
