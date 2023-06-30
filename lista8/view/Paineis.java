@@ -7,34 +7,34 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import model.Celula;
-import model.Entidades;
-import model.Plano;
-
-import javax.swing.BoxLayout;
+import control.ControlarPaineis;
 
 public class Paineis extends JPanel {
-
-	JPanel painelcima;
-	JPanel painelbotoes;
-	JPanel paineldireito;
-	JTextField barra;
-	JButton jogar;
+	
+	private PainelInfo painelinfo;
+	private PainelBotoesJogo painelbotoesjogo;
+	private ControlarPaineis controlpainel;
+	private JPanel painelcima;
+	private JPanel painelbotoes;
+	private JPanel paineldireito;
+	private JTextField barra;
+	private JButton jogar;
 
 	public Paineis() {
 
 		this.setLayout(new BorderLayout());
 		this.add(painelBotoes(), BorderLayout.WEST);
-		this.add(painelSuperior(), BorderLayout.NORTH);
 		this.add(painelDireito(), BorderLayout.EAST);
+		this.add(painelSuperior(), BorderLayout.NORTH);
+		
 	}
 
 	public JPanel painelSuperior() {
@@ -66,20 +66,23 @@ public class Paineis extends JPanel {
 
 		return painelcima;
 	}
-
+	
 	private JPanel painelDireito() {
-		
-		paineldireito = new JPanel();
-		paineldireito.setLayout(new BoxLayout(paineldireito, BoxLayout.Y_AXIS));
-		paineldireito.setPreferredSize(new Dimension(235, 0));
-		paineldireito.add(new PainelInfo());
-		paineldireito.add(new PainelRobos());
-		paineldireito.add(new PainelBotoesJogo());
-		paineldireito.setVisible(false);
-		
-		return paineldireito;
-	}
+	    painelinfo = new PainelInfo();
+	    painelbotoesjogo = new PainelBotoesJogo();
 
+	    ControlarPaineis controlador = new ControlarPaineis(painelbotoesjogo, painelinfo);
+	    controlador.controlPaineis();
+
+	    paineldireito = new JPanel();
+	    paineldireito.setLayout(new BoxLayout(paineldireito, BoxLayout.Y_AXIS));
+	    paineldireito.setPreferredSize(new Dimension(235, 0));
+	    paineldireito.add(painelinfo); 
+	    paineldireito.add(new PainelRobos());
+	    paineldireito.add(painelbotoesjogo);
+	    paineldireito.setVisible(false);
+	    return paineldireito;
+	}
 
 	public JPanel painelBotoes() {
 
@@ -98,6 +101,10 @@ public class Paineis extends JPanel {
 	public JPanel getPainelbotoes() {
 		return painelbotoes;
 	}
+	
+	public JPanel getPainelInfo() {
+	    return painelinfo;
+	}
 
 	private class acaoJogar implements ActionListener{
 
@@ -108,7 +115,7 @@ public class Paineis extends JPanel {
 			paineldireito.setVisible(!paineldireito.isVisible());
 		}
 	}
-
+	
 	private class acaoBarra implements DocumentListener{
 
 		public void insertUpdate(DocumentEvent e) {
@@ -122,11 +129,5 @@ public class Paineis extends JPanel {
 		public void changedUpdate(DocumentEvent e) {
 			verificarBotaoJogar();
 		}
-
 	}
 }
-
-
-
-
-

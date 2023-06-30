@@ -11,77 +11,67 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.border.LineBorder;
 
-public class PainelBotoesJogo extends JPanel{
-	
+public class PainelBotoesJogo extends JPanel {
+
+	private JButton verificar;
+	private JButton sair;
+	private JButton proximajogada;
+
 	public PainelBotoesJogo() {
 		
-		JButton verificar = new JButton(" Verificar ");
-		JButton sair = new JButton(" Sair do Jogo ");
-		JButton proximajogada = new JButton(" Próxima Jogada ");
+		verificar = criarBotao("Verificar");
+		sair = criarBotao("Sair do Jogo");
+		sair.addActionListener(new AcaoSairJogo());
+		proximajogada = criarBotao("Próxima Jogada");
+		proximajogada.setEnabled(false);
 
-		verificar.setPreferredSize(new Dimension(60,60));
-		verificar.setBackground(Color.black);
-		verificar.setForeground(Color.white);
-		verificar.addActionListener(new acaoVerificar());
+		setLayout(new GridLayout(3, 1, 1, 5));
+		setBackground(Color.white);
 
-		proximajogada.setPreferredSize(new Dimension(60,60));
-		proximajogada.setBackground(Color.black);
-		proximajogada.setForeground(Color.white);
-		proximajogada.addActionListener(new acaoProximaJogada());
+		add(verificar);
+		add(proximajogada);
+		add(sair);
+	}
 
-		sair.setPreferredSize(new Dimension(60,60));
-		sair.setBackground(Color.black);
-		sair.setForeground(Color.white);
-		sair.addActionListener(new acaoSairJogo());
-
-		this.setLayout(new GridLayout(3,1,1,5));
-		this.setBackground(Color.white);
-
-		this.add(verificar);
-		this.add(proximajogada);
-		this.add(sair);
-
+	private JButton criarBotao(String texto) {
+		JButton botao = new JButton(texto);
+		botao.setPreferredSize(new Dimension(60, 60));
+		botao.setBackground(Color.black);
+		botao.setForeground(Color.white);
+		return botao;
 	}
 
 	private int dialogoSairJogo() {
-		
-		ImageIcon icon = new ImageIcon("aviso.png");
+
+		ImageIcon icon = new ImageIcon("C:\\Users\\Yan Marcelo\\Documents\\eclipseufc\\lista8\\icons\\aviso.png");
 		UIManager.put("OptionPane.questionIcon", icon);
 		UIManager.put("Button.background", Color.BLACK);
-        UIManager.put("Button.foreground", Color.WHITE);
-        
+		UIManager.put("Button.foreground", Color.WHITE);
+
 		return JOptionPane.showConfirmDialog(
 				null,
 				"Tem certeza que deseja sair do jogo?",
 				"Confirmação",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE);
-		}
-	
-	private class acaoSairJogo implements ActionListener {
+	}
 
+	private class AcaoSairJogo implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int resposta = dialogoSairJogo();
-
 			if (resposta == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
 		}
 	}
-	
-	private class acaoVerificar implements ActionListener {
 
-		public void actionPerformed(ActionEvent e) {
-			
-			}
-		}
-
-	private class acaoProximaJogada implements ActionListener {
-
-	public void actionPerformed(ActionEvent e) {
-		
-		}
+	public JButton getVerificar() {
+		return verificar;
 	}
+
+	public void setVerificar(JButton verificar) {
+		this.verificar = verificar;
+	}
+
 }

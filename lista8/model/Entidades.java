@@ -11,7 +11,8 @@ public abstract class Entidades {
     private int pontuacao;
     private ImageIcon iconEntidade;
 
-    public Entidades(Plano plano, int posicaox, int posicaoy, ImageIcon iconEntidade) {
+    public Entidades(Plano plano, int posicaox, int posicaoy, ImageIcon iconEntidade, int pontuacao) {
+    	this.setPontuacao(pontuacao);
         this.setPlano(plano);
         this.setPosicaox(posicaox);
         this.setPosicaoy(posicaoy);
@@ -21,7 +22,11 @@ public abstract class Entidades {
     public void aumentarPontuacao(int quantidade) {
         setPontuacao(getPontuacao() + quantidade);
     }
-
+    
+    public void diminuirPontuacao(int quantidade) {
+        setPontuacao(getPontuacao() - quantidade);
+    }
+    
 	public int getPosicaox() {
 		return posicaox;
 	}
@@ -61,6 +66,6 @@ public abstract class Entidades {
 	public void setPlano(Plano plano) {
 		this.plano = plano;
 	}
-
+		
 }
 
