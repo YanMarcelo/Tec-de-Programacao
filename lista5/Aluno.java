@@ -7,7 +7,6 @@ public class Aluno extends Entidades{
 		super(plano);
 		tipo= "\uD83C\uDf93";
 	}
-
 }
 
 
